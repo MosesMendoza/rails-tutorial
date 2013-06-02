@@ -4,14 +4,19 @@ describe "Static pages" do
   let(:t){ "Sample App" }
 
   describe "Home page" do
-    it "should have the h1 '#{t}'" do
+    it "should have the h1 Sample App'" do
       visit '/static_pages/home'
-      page.should have_selector('h1', :text => '#{t}')
+      page.should have_selector('h1', :text => "#{t}")
     end
 
-    it "should have the title 'Home'" do
+    it "should have the base title" do
       visit '/static_pages/home'
-      page.should have_selector('title', :text => "#{t} | Home")
+      page.should have_selector('title', :text => "#{t}")
+    end
+
+    it "should not have a custom page title" do
+      visit '/static_pages/home'
+      page.should_not have_selector('title', :text => "| Home")
     end
   end
 
